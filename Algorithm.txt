@@ -1,0 +1,242 @@
+An algorithm is a sequence of unambiguous instructions for solving a problem, i.e.,
+for obtaining a required output for any legitimate input in a finite amount of time.
+
+Important points:
+    1. The unambiguity requirement for each step of an algorithm cannot be compromised.
+    2. The range of inputs for which an algorithm works has to be specified carefully.
+    3. The same algorithm can be represented in several different ways.
+    4. There may exist several algorithms for solving the same problem.
+
+Ex:
+22 gloves in a drawer
+    - 5 red pairs
+    - 4 yellow pairs
+    - 2 green pairs
+How many gloves do you have to grab in order to guarantee you have at least 1 matching pair.
+The answer is 12; In the worst case scenario, you end up grabbing 12 left and right gloves.
+
+=====================================================================================================================
+Sequential Search:
+
+int sequential_search(int array[], const int size, int key){
+    for(int i = 0; i < size; i++){
+        if(array[i] == key)
+            return i;
+    }
+    return -1;
+}
+
+Assume:
+    1. The probability or a successful search is equal to p(0 <= p <= 1).
+    2. The probability of the first match occurring in the ith position is the same for every i.
+
+With a successful search, the probability of the first match occurring in the ith position is p/n for every i.
+Number of comparisons: i
+
+With an unsuccessful search, the number of comparisons will be n, and with the probability of such a search
+being 1-p.
+
+Cavg(n) = [1 * p/n + 2 * p/n + ... + i * p/n + ... + n * p/n] + n(1-p)
+Cavg(n) = (p/n)[1 + 2 + ... + i + ... + n] + n(1 - p)
+Cavg(n) = (p(n+1))/2 + n(1-p)
+
+If p = 1, the search is successful, and the number of probes is (n+1)/2.
+If p = 0, the search is unsuccessful, and the number of probes is n.
+
+=====================================================================================================================
+
+O(g(n)) = {f(n) : There are positive constants c and n0 such that 0 <= f(n) <= c * g(n) for all n >= n0}
+Ω(g(n)) = {f(n) : There are positive constants c and n0 such that 0 <= c * g(n) <= f(n) for all n >= n0}
+Θ(g(n)) = {f(n) : There are positive constants c and n0 such that 0 <= c1 * g(n) <= f(n) <= c2 * g(n) for all n >= n0}
+
+=====================================================================================================================
+O-notation:
+
+100n + 5 <= 100n + n (For all n >= 5) = 101n <= 101n^2
+c = 101
+n0 = 5
+
+OR
+
+100n + 5 <= 100n + 5n (For all n >= 1) = 105n <= 105n^2
+c = 105
+n0 = 1
+
+OR
+
+100n + 5 <= 1n^2 (For all n >= 101)
+c = 1
+n0 = 101
+
+As c increases, n0 tends to decrease. All answers are correct. Goal is to minimize c.
+
+Find an upper bound for f(n) = 3n + 8
+O(n)
+3n + 8 <= 4n, for all n >= 8.
+c = 4
+n0 = 8
+
+OR
+
+3n + 8 <= 3n + 8n = 11n, for all n >= 1.
+c = 11
+n0 = 1
+
+Find an upper bound for f(n) = n^2 + 1
+O(n^2)
+n^2 + 1 <= 2n^2, for all n >= 1.
+c = 2
+n0 = 1
+
+Ω-notation = Lower bound
+n^3 ε Ω(n^2)? YES
+cn^2 <= n^3
+c = 1
+n0 = 1
+
+Find a lower bound for f(n) = 5n^2
+Ω(n^2)
+5n^2 <= 5n^2
+c = 5
+n0 = 1
+
+Does f(n) = 100n + 5 ε Ω(n^2)? NO
+Proof by Contradiction:
+There exists positive constants c, n0 such that 0 <= cn^2 <= 100n + 5.
+100n + 5 <= 100n + 5n, for all n >= 1, <= 100n
+cn^2 <= 105n
+cn^2 - 105n <= 0
+n(cn - 105) <= 0
+n = 0
+cn - 105 = 0
+cn = 105
+n = 105/c
+
+<=====0--------------105/c++++++++++++++>
+X contradiction holds only for n <= 105/c
+
+Θ-notation:
+0.5n(n-1) ε Θ(n^2)?
+
+Prove upper bound first:
+0.5n(n-1) = 0.5n^2 - 0.5n <= 0.5n^2, for all n >= 1.
+
+Prove lower bound next:
+0.5n(n-1) = 0.5n^2 - 0.5n >= 0.5n^2 - 0.5n >= 0.5n^2 - (0.5n)(0.5n) = 0.25n^2, for all n >= 2.
+c1 = 0.25
+c2 = 0.5
+n0 = 2
+
+Does n ε Θ(n^2)? NO
+(c1 * n^2 <= n) <= c2 * n^2
+c1 * n^2 <= n
+n^2 <= n/c1
+n <= 1/c1
+X cannot be <= a constant.
+
+=====================================================================================================================
+Properties of Logarithms:
+1. loga(1) = 0
+2. loga(a) = 1
+3. loga(x^y) = yloga(x)
+4. loga(xy) = loga(x) + loga(y)
+5. loga(x/y) = loga(x) - loga(y)
+6. a^(logb(x)) = x^(logb(a))
+7. loga(x) = (logb(x)/logb(a))
+
+Combinatorics:
+1. # of permutations of an n-element set: P(n) = n!
+2. # of k-combinations of an n-element set: C(n,k) = n!/(k!(n-k)!)
+3. # of subsets of an n-element set: 2^n
+
+Summations:
+1. The sum from i=1 to N of C * i = C * the sum from i=1 to N of i.
+2. The sum from i=C to N of i = the sum from i=0 to N-C of i+C.
+3. The sum from i=C to N of i = (the sum from i=0 to N of i)-(the sum from i=0 to C-1 of i).
+4. The sum from i=0 to N of N-i = the sum from i=1 to N of i.
+5. The sum from i=1 to N of 1 = N.
+6. The sum from i=1 to N of C = C * N.
+7. The sum from i=1 to N of A+B = (the sum from i=1 to N of A)+(the sum from i=1 to N of B).
+
+Geometric Series:
+1. The sum from i=0 to N of A^i = ((A^N+1)-1)/(A-1), where A != 1.
+
+Harmonic Series:
+1. The sum from i=1 to N of 1/i = 1 + 1/2 + 1/3 + 1/4 + ... + 1/N ~= logn
+
+logbase2 = lg
+
+=====================================================================================================================
+Makefile Explanation:
+
+CXX      = g++
+CXX_FILE = $(wildcard *.cpp)
+TARGET   = $(patsubst %.cpp,%,$(CXX_FILE))
+CXXFLAGS = -g -std=c++11 -Wall -Werror -pedantic-errors -fmessage-length=0
+
+all:
+	$(CXX) $(CXXFLAGS) $(CXX_FILE) -o $(TARGET)
+clean:
+	rm -f $(TARGET) $(TARGET).exe
+
+-Wall, -Werror, -pedantic-errors are all ways to keep your code running while notifying you of errors within your code
+	-Werror turns warnings into errors
+	-Wall keeps code running while giving you warnings
+	-pedantic-errors notifys you of more bugs and errors
+
+-g allows for better optimization for running code, effectively cutting down time
+	-Debugs code and traces code for errors
+    -Saves debugging info in the executable
+-std is the C++ standard
+Wildcard searches for the directory of a file
+
+Build instruction must come after a tab character (all:)
+-f is a force command
+Under "clean", rm removes a TARGET.exe file, and adding -f forces it to remove that file
+
+=====================================================================================================================
+Command Line Commands:
+
+Navigating Directories:
+pwd == print working directory
+    -Tells you what directory you are currently in.
+cd [dir] == change directory
+    -Changes your current working directory to [dir]
+    -Example: cd C:/Users/Admin/workspace
+ls == list contents of current working directory 
+Other Tips: 
+    -To reference the current directory, you can use “.”
+    -To reference the parent directory, you can use “..”
+    -For example, cd .. will change your working directory to the parent directory.
+
+Compiling and Executing:
+make [targets] == Compiles the specified targets according to the “makefile” in your working directory
+./<<filename>> == Used to execute a compiled program in the current directory
+    -The program must have already been compiled using make.
+    -Example: ./gcd 2 4 will run gcd with the arguments “2” and “4”
+bash [file] == Used to execute bash scripts (usually ending in .sh) in the current directory.
+    -Example: bash test_gcd.sh will run the test script for gcd.
+echo <<input>> | ./<<filename>> > output.txt == Outputs into a text file
+valgrind --leak-check=yes ./<<filename>> == Runs a memory check to find leaks in code
+
+Moving, Creating, or Deleting Files and Directories:
+rm [-r] [file] == Deletes the target file.
+    -If the “file” is a directory add “-r” as an option to recursively delete the directory and its contents. Be careful!
+    -Example: rm -r gcd will delete the directory named “gcd”
+    -Example: rm gcd.cpp makefile will delete the files “gcd.cpp” and “makefile”
+mv [SOURCE] [DEST] == Moves a file to a directory, or rename a file.
+    -Example: mv gcd.cpp gcd will place “gcd.cpp” into the directory named “gcd”
+    -Example: mv GCD.cpp gcd.cpp will rename the file “GCD.cpp” to “gcd.cpp”
+cp [-r] [SOURCE] [DEST] == Makes a copy of a file or directory.
+    -Example: cp gcd.cpp gcd2.cpp will make a copy of “gcd.cpp” named “gcd2.cpp”
+mkdir [DIRECTORY] == Makes a new directory, if it does not already exist.
+    -Example: mkdir gcd will create a directory named gcd.
+rmdir [DIRECTORY] == Removes a directory, only if it is empty.
+    -Example: rmdir gcd will remove the directory named gcd as long as it’s empty.
+
+Accessing Linux Lab:
+ssh user@host == Opens a secure shell connection over the internet to your username at a given host. The list of linux lab hostnames is available on canvas.
+    -Example: ssh username@rainman.srcit.stevens-tech.edu
+scp [-r] [SOURCE] user@host:[DEST] == Copies the file from source to the destination. 
+    -Example: scp -r gcd username@rainman.srcit.stevens-tech.edu:~ will copy the “gcd” directory to the home directory of username on linux lab. 
+=====================================================================================================================

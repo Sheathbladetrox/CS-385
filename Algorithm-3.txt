@@ -1,0 +1,33 @@
+A graph is a set of vertices and edges.
+A graph can be weighted or unweighted, directed or undirected.
+
+Adjacency Matrix:
+Runtime for determining if there's an edge between 2 vertices: Θ(1)
+Runtime for determining all vertices adjacent to a given vertex: Θ(v)
+Space requirement: Θ(v^2)
+When to use: Small and dense graphs
+Breadth-First Search Traversal Runtime: Θ(v^2)
+DFS Runtime: Θ(v^2)
+
+Adjacency List:
+Runtime for determining if there's an edge between 2 vertices: O(d), O(v), d is degree of vertex
+Runtime for determining all vertices adjacent to a given vertex: Θ(d), Θ(v)
+Space requirement: Θ(v + e), e for edges
+When to use: Large and sparse graphs
+Breadth-First Search Traversal Runtime: Θ(v + e)
+DFS Runtime: Θ(v + e)
+
+
+Depth-First Search:
+Visits recursively all the unvisited vertices connected to vertex v by a path and numbers them in the order they are encountered via global variable.
+
+Breadth-First Search:
+Visits all the unvisited vertices connected to vertex v by a path and numbers them in the order they are visited via global variable.
+
+Topological Sort:
+
+node        2 3 5 7 8 9 10 11
+indegree    1 0 0 0 2 2 2  2
+
+Start with node 3, since it's the lowest number node with the lowest number of edges going into it.
+In ascending order of nodes, remove the node in question and remove the edges connected to the node.

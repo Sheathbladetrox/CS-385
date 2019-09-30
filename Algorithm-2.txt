@@ -1,0 +1,57 @@
+Bitshifting Operators:
+int a = 5;     00000101
+cout << (a << 2);        101 -> 10100
+Everytime you shift to left, multiply by 2
+
+Bitwise Operators:
+AND(&)    OR(|)    XOR(^)      NOT(!)
+0101      0101     0101        0101
+0111      0111     0111        0111
+----      ----     ----        ----
+0101      0111     0010        1000
+
+============================================================
+Convex Hull:
+A set of points (finite or infinite) in the plane is called convex if for any
+2 points p and q in the set, the entire line segment with endpoints p and q belongs to the set.
+The convex hull of a set S of points in the smallest convex set containing S.
+
+^
+|
+|
+|-O----------------
+|-------O----------
+|-O----------------
+|-------------O----
++------------------>
+
+m = ▲y/▲x = (4-2)/(3-1) = 1
+
+y-2 = x-1
+-1 = x-y
+1-4 = -3 < -1
+5-1 = 4 > -1
+(1,4) and (5,1) are part of the convex hull.
+
+C(n,2)
+n!/(2!(n-2)!) = n(n-1)/2
+
+Graham Scan: O(nlogn), O(n) for finding the point.
+Find the lowest y-coordinate point and the lowest x-coordinate point if necessary.
+Sort all points by increasing angle, and then look at the points and calculate the angles between each line segments.
+If the angle is concave, get rid of it; if it is convex, create the line.
+
+Python Algorithm for Ways to Walk Up Stairs:
+
+def get_ways(num_stairs):
+    ways = []
+    if num_stairs <= 0:
+        ways.append([])
+    else:
+        for i in range(1,4):
+            if num_stairs >= i:
+                result = get_ways(num_stairs - i)
+                for j in range(len(result)):
+                    result[j].append(i)
+                    ways += result
+    return ways

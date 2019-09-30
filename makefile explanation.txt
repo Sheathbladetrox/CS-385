@@ -1,0 +1,28 @@
+CXX      = g++
+CXX_FILE = $(wildcard *.cpp)
+TARGET   = $(patsubst %.cpp,%,$(CXX_FILE))
+CXXFLAGS = -g -std=c++11 -Wall -Werror -pedantic-errors -fmessage-length=0
+
+all:
+	$(CXX) $(CXXFLAGS) $(CXX_FILE) -o $(TARGET)
+clean:
+	rm -f $(TARGET) $(TARGET).exe
+
+-Wall, -Werror, -pedantic-errors are all ways to keep your code running while notifying you of errors within your code
+	-Werror turns warnings into errors
+	-Wall keeps code running while giving you warnings
+	-pedantic-errors notifys you of more bugs and errors
+
+-g allows for better optimization for running code, effectively cutting down time
+	-Debugs code and traces code for errors
+-std is the C++ standard
+Wildcard searches for the directory of a file
+
+Build instruction must come after a tab character (all:)
+-f is a force command
+Under "clean", rm removes a TARGET.exe file, and adding -f forces it to remove that file
+
+echo <<input>> | ./<<filename>> > output.txt == Outputs into a text file
+
+valgrind --leak-check=yes ./<<filename>>
+
